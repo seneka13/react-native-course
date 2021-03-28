@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Button, Alert } from "react-native";
+import { StyleSheet, View, TextInput, Alert, Keyboard } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { THEME } from "../theme";
 
 export default function AddTodo({ onSubmit }) {
   const [value, setValue] = useState("");
@@ -7,6 +9,7 @@ export default function AddTodo({ onSubmit }) {
     if (value.trim()) {
       onSubmit(value);
       setValue("");
+      Keyboard.dismiss();
     } else {
       Alert.alert("You need to write todo");
     }
@@ -22,7 +25,9 @@ export default function AddTodo({ onSubmit }) {
         autoCapitalize="none"
         // keyboardType="web-search"
       />
-      <Button title="Add Todo" onPress={pressHandler} />
+      <AntDesign.Button name="pluscircleo" size={24} color="white" onPress={pressHandler}>
+        Add Todo
+      </AntDesign.Button>
     </View>
   );
 }
@@ -35,10 +40,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   input: {
-    width: "70%",
+    width: "60%",
     padding: 10,
     borderStyle: "solid",
     borderBottomWidth: 2,
-    borderBottomColor: "#3949ab",
+    borderBottomColor: THEME.MAIN_COLOR,
   },
 });
